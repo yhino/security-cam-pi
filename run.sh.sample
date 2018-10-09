@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export ACCESS_TOKEN="YOUR-SLACK-TOKEN"
+export SLACK_CHANNEL="YOUR-SLACK-CHANNEL"
+
+python security-cam.py >> security-cam.log 2>&1
