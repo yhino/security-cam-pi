@@ -34,13 +34,13 @@ import requests
 # Setup Camera
 camera = PiCamera()
 camera.resolution = (640, 480)
-camera.framerate = 3
+camera.framerate = 6
 camera.rotation = int(CAMERA_ROTATE)
 camera.brightness = int(CAMERA_BRIGHTNESS)
 
 cap = PiRGBArray(camera, size=(640, 480))
 
-faceClassifier = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
+faceClassifier = cv2.CascadeClassifier('haarcascade_frontalface_alt2.xml')
 
 time.sleep(0.1)
 
@@ -56,8 +56,8 @@ for frame in camera.capture_continuous(cap, format='bgr', use_video_port=True):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     faces = faceClassifier.detectMultiScale(
             gray,
-            scaleFactor=1.1,
-            minNeighbors=5,
+            scaleFactor=1.11,
+            minNeighbors=3,
             minSize=(30, 30),
             flags=cv2.CASCADE_SCALE_IMAGE
             )
