@@ -2,6 +2,7 @@
 
 Security Camera Script running on Raspberry Pi
 
+
 ## Requirement
 
 ```
@@ -10,6 +11,7 @@ sudo apt-get install \
     python-opencv \
     python-requests
 ```
+
 
 ## Install
 
@@ -21,8 +23,7 @@ sudo apt-get install \
 
     cp run.sh.sample run.sh
 
-3. change "YOUR-SLACK-TOKEN" and "YOUR-SLACK-CHANNEL"
-    vim run.sh
+3. Change the "YOUR-SLACK-TOKEN" and "YOUR-SLACK-CHANNEL" in `run.sh`
 
 
 ## Usage
@@ -34,3 +35,4 @@ Run simple.
 When want to run debug mode,
 
     DEBUG=on /your-install-dir/run.sh
+
