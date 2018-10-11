@@ -16,13 +16,13 @@ sudo apt-get install \
 ## Install
 
 1. Clone
-
+    ```
     git clone https://github.com/yhinoz/security-cam-pi.git
-
+    ```
 2. Create `run.sh`, It's easy to copy `run.sh.sample`
-
+    ```
     cp run.sh.sample run.sh
-
+    ```
 3. Change the "YOUR-SLACK-TOKEN" and "YOUR-SLACK-CHANNEL" in `run.sh`
 
 
