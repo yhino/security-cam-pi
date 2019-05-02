@@ -15,9 +15,6 @@ sudo apt-get install \
 wget https://github.com/mt08xx/files/raw/master/opencv-rpi/libopencv3_3.4.4%2Brpi01-20181119.2_armhf.deb && \
     sudo apt install -y ./libopencv3_3.4.4+rpi01-20181119.2_armhf.deb && \
     sudo ldconfig
-
-# pretrained model
-
 ```
 
 
