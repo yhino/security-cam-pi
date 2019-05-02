@@ -34,7 +34,7 @@ import requests
 # Setup Camera
 camera = PiCamera()
 camera.resolution = (640, 480)
-camera.framerate = 15
+camera.framerate = 1
 camera.rotation = int(CAMERA_ROTATE)
 camera.brightness = int(CAMERA_BRIGHTNESS)
 
@@ -92,7 +92,7 @@ for frame in camera.capture_continuous(cap, format='bgr', use_video_port=True):
     # Post to slack
     files = {'file': open(writeFilename, 'rb')}
     params = {'filename': writeFilename, 'token': ACCESS_TOKEN, 'channels': [SLACK_CHANNEL]}
-    res = requests.post(url="https://slack.com/api/files.upload",params=params, files=files)
+    res = requests.post(url="https://slack.com/api/files.upload", params=params, files=files)
 
     logger.info('post to slack, response = {}'.format(res))
 

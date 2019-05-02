@@ -70,4 +70,4 @@ if __name__=='__main__':
         CpuFreq     = int(GetCpuFreq()/1000000)
         CpuFreq_str = "ARM %4dMHz  " % CpuFreq
         Info_str = CpuFreq_str + CpuTemp + CpuRate_str + "%"
-        print Info_str ,CpuRateList
+        print(Info_str, CpuRateList)
