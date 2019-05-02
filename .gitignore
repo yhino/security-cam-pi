@@ -1,2 +1,4 @@
+models/
+
 run.sh
 *.log

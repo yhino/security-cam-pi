@@ -2,5 +2,8 @@
 
 export ACCESS_TOKEN="YOUR-SLACK-TOKEN"
 export SLACK_CHANNEL="YOUR-SLACK-CHANNEL"
+export CAMERA_ROTATE="270"
+export CAMERA_BRIGHTNESS="50"
+export DEBUG="on"
 
-python security-cam.py >> security-cam.log 2>&1
+python3 security-cam.py >> security-cam.log 2>&1

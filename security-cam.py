@@ -34,15 +34,18 @@ import requests
 # Setup Camera
 camera = PiCamera()
 camera.resolution = (640, 480)
-camera.framerate = 6
+camera.framerate = 15
 camera.rotation = int(CAMERA_ROTATE)
 camera.brightness = int(CAMERA_BRIGHTNESS)
 
 cap = PiRGBArray(camera, size=(640, 480))
 
-faceClassifier = cv2.CascadeClassifier('haarcascade_frontalface_alt2.xml')
+model = cv2.dnn.readNetFromTensorflow('models/frozen_inference_graph.pb',
+                                      'models/ssd_mobilenet_v2_coco_2018_03_29.pbtxt')
 
-time.sleep(0.1)
+logger.info('wait boot camera')
+
+time.sleep(2.0)
 
 logger.info('start capture')
 
@@ -50,30 +53,35 @@ for frame in camera.capture_continuous(cap, format='bgr', use_video_port=True):
     logger.debug('capture processing')
 
     image = frame.array
+    image_height, image_width, _ = image.shape
 
-    # face detection
-    logger.debug('face detection')
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    faces = faceClassifier.detectMultiScale(
-            gray,
-            scaleFactor=1.11,
-            minNeighbors=3,
-            minSize=(30, 30),
-            flags=cv2.CASCADE_SCALE_IMAGE
-            )
+    # detection
+    logger.debug('detection')
 
-    logger.debug('detect faces = {}'.format(len(faces)))
+    model.setInput(cv2.dnn.blobFromImage(image, size=(300, 300), swapRB=True))
+    output = model.forward()
 
-    if len(faces) < 1:
+    objects = []
+    for detection in output[0, 0, :, :]:
+        confidence = detection[2]
+        if confidence > .5:
+            class_id = detection[1]
+            if class_id == 1:
+                objects.append([
+                    int(detection[3] * image_width),     # x
+                    int(detection[4] * image_height),    # y
+                    int(detection[5] * image_width),     # width
+                    int(detection[6] * image_height),    # height
+                    ])
+
+
+    if len(objects) < 1:
         cap.truncate(0)
         continue
 
-    for (x, y, w, h) in faces:
-        # Draw rectangle around the faces
-        cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
-
-    # TODO-2: Face recognition
-        # TODO-2: Crop faces
+    for (x, y, w, h) in objects:
+        # Draw rectangle around the objects
+        cv2.rectangle(image, (x, y), (w, h), (0, 255, 0), 2)
 
     # Save image
     writeFilename = '/tmp/{}-{}.jpg'.format(datetime.now().strftime('%Y%m%d%H%M%S'), int(round(time.time() * 1000)))
