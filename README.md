@@ -22,7 +22,7 @@ wget https://github.com/mt08xx/files/raw/master/opencv-rpi/libopencv3_3.4.4%2Brp
 
 1. Clone
     ```
-    git clone https://github.com/yhinoz/security-cam-pi.git
+    git clone https://github.com/yhino/security-cam-pi.git
     ```
 2. Create `run.sh`, It's easy to copy `run.sh.sample`
     ```
