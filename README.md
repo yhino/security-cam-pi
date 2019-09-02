@@ -14,7 +14,8 @@ sudo apt-get install \
 # opencv-3.x
 wget https://github.com/mt08xx/files/raw/master/opencv-rpi/libopencv3_3.4.4%2Brpi01-20181119.2_armhf.deb && \
     sudo apt install -y ./libopencv3_3.4.4+rpi01-20181119.2_armhf.deb && \
-    sudo ldconfig
+    sudo ldconfig && \
+    rm ./libopencv3_3.4.4+rpi01-20181119.2_armhf.deb
 ```
 
 
@@ -33,8 +34,9 @@ wget https://github.com/mt08xx/files/raw/master/opencv-rpi/libopencv3_3.4.4%2Brp
 4. Install pretrained model
     ```
     mkdir -p models && \
+        (cd models && \
         wget https://github.com/rdeepc/ExploreOpencvDnn/raw/master/models/frozen_inference_graph.pb && \
-        wget https://raw.githubusercontent.com/rdeepc/ExploreOpencvDnn/master/models/ssd_mobilenet_v2_coco_2018_03_29.pbtxt
+        wget https://raw.githubusercontent.com/rdeepc/ExploreOpencvDnn/master/models/ssd_mobilenet_v2_coco_2018_03_29.pbtxt )
     ```
 
 
